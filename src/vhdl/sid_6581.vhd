@@ -221,7 +221,10 @@ begin
 
 -- SID filters
 
-        process (do_buf,cs)
+        process (cs, addr,
+		           pot_x, pot_Y,
+					  Misc_Osc3_Random, Misc_Env3
+					  )
         begin
           -- Tristate data lines
           if cs='1' then
@@ -242,7 +245,7 @@ begin
         end process;
 
         
-	process (clk_1MHz,reset)
+	process (clk_1MHz, reset_drive, ff1)
 	begin
 		if reset_drive='1' then
 			ff1<='0';
@@ -253,7 +256,7 @@ begin
 		end if;
 	end process;
 
-	process(clk32)
+	process(clk32, reset, ff1, tick_q1)
 	begin
           if rising_edge(clk32) then
             reset_drive <= reset;

@@ -1028,7 +1028,7 @@ begin
              );
 
   
-  process(ioclock) is
+  process(ioclock, fastio_addr) is
     variable register_bank : unsigned(7 downto 0);
     variable register_page : unsigned(3 downto 0);
     variable register_num : unsigned(7 downto 0);
@@ -1123,7 +1123,12 @@ begin
     end if;
   end process;
 
-  process(pixelclock) is
+  process(pixelclock,
+          is_sprite_final,
+			 sprite_colour_final,
+			 pixel_final,
+			 alpha_final
+			 ) is
   begin
     -- Merge chargen and sprite pixels
     is_sprite_out <= is_sprite_final;

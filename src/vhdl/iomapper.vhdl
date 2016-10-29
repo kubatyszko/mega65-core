@@ -816,7 +816,11 @@ begin
     end if;
   end process;
   
-  process (r,w,address,cia1portb_in,cia1porta_out,colourram_at_dc00,
+  process (r, w, address,
+           cia1portb_in,
+			  cia1porta_out,
+			  colourram_at_dc00,
+			  cpu_hypervisor_mode,
            sector_buffer_mapped_read)
   begin  -- process
 

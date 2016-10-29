@@ -1196,7 +1196,36 @@ begin
           reg_rom_a000,reg_c65_charset,reg_rom_8000,reg_palrom,
           reg_h640,reg_h1280,reg_v400,xcounter_drive,ycounter_drive,
           horizontal_smear,xfrontporch_drive,chargen_active_drive,
-          inborder_drive,chargen_active_soon_drive,card_number_drive) is
+          inborder_drive,chargen_active_soon_drive,card_number_drive,vicii_2mhz_internal,
+			 viciii_fast_internal,
+			 bitplane_mode,
+			 bitplane_enables,
+			 bitplane_addresses,
+			 bitplane_complements,
+			 dat_x,
+			 dat_y,
+			 sprite_bitplane_enables,
+			 sprite_horizontal_tile_enables,
+			 antialiaser_enable,
+			 viciv_fast_internal,
+			 sprite_extended_height_enables,
+			 sprite_extended_height_size,
+			 sprite_extended_width_enables,
+			 palette_bank_chargen256,
+			 bitplane_sixteen_colour_mode_flags,
+			 bitplanes_x_start,
+			 bitplanes_y_start,
+			 vicii_sprite_sprite_colission_map,
+			 debug_cycles_to_next_card_drive2,
+			 debug_character_data_from_rom_drive2,
+			 debug_screen_ram_buffer_address_drive2,
+			 xcounter_delay,
+			 debug_raster_fetch_state_drive2,
+			 debug_paint_fsm_state_drive2,
+			 debug_charaddress_drive2,
+			 debug_charrow_drive2,
+			 debug_chargen_active_drive2
+			 ) is
     variable bitplane_number : integer;
     procedure viciv_interpret_legacy_mode_registers is
     begin      

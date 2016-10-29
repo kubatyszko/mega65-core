@@ -209,7 +209,7 @@ begin  -- behavioural
   -- type   : sequential
   -- inputs : pixelclock, <reset>
   -- outputs: colour, is_sprite_out
-  main: process (pixelclock)
+  main: process (pixelclock, ioclock)
   begin  -- process main
     if ioclock'event and ioclock = '1' then
       -- Allow writing to bitplane buffer memory directly for debugging

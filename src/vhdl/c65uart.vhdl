@@ -121,28 +121,44 @@ architecture behavioural of c65uart is
 
 begin  -- behavioural
   
-  process(pixelclock,cpuclock,fastio_address,fastio_write
-          ) is
-    -- purpose: use DDR to show either input or output bits
+  process(pixelclock, cpuclock, clock709375,
+          fastio_address, fastio_write, fastio_read,
+			 reg_data_rx,
+			 reg_divisor,
+			 reg_intmask,
+			 reg_intflag,
+			 reg_porte_read, reg_porte_ddr,
+			 reg_portf_read, reg_portf_ddr,
+			 portg, porth, porti,
+          reg_status0_rx_full,         reg_status1_rx_overrun,
+          reg_status2_rx_parity_error, reg_status3_rx_framing_error,
+          reg_status4_rx_idle_mode,    reg_status5_tx_eot,
+          reg_status6_tx_empty,        reg_status7_xmit_on,
+          reg_ctrl0_parity_even,         reg_ctrl1_parity_enable,
+          reg_ctrl23_char_length_deduct, reg_ctrl45_sync_mode_flags,
+          reg_ctrl6_rx_enable,           reg_ctrl7_tx_enable
+			 ) is
+			 
     function ddr_pick (
+      -- purpose: use DDR to show either input or output bits
       ddr                            : in std_logic_vector(1 downto 0);
       i                              : in std_logic_vector(1 downto 0);
       o                              : in std_logic_vector(1 downto 0))
-    return unsigned is
-    variable result : unsigned(1 downto 0);     
-  begin  -- ddr_pick
-    --report "determining read value for CIA port." &
-    --  "  DDR=$" & to_hstring(ddr) &
-    --  ", out_value=$" & to_hstring(o) &
-    --  ", in_value=$" & to_hstring(i) severity note;
-    result := unsigned(i);
-    for b in 0 to 1 loop
-      if ddr(b)='1' and i(b)='1' then
-        result(b) := std_ulogic(o(b));
-      end if;
-    end loop;  -- b
-    return result;
-  end ddr_pick;
+      return unsigned is
+      variable result : unsigned(1 downto 0);     
+    begin  -- ddr_pick
+      --report "determining read value for CIA port." &
+      --  "  DDR=$" & to_hstring(ddr) &
+      --  ", out_value=$" & to_hstring(o) &
+      --  ", in_value=$" & to_hstring(i) severity note;
+      result := unsigned(i);
+      for b in 0 to 1 loop
+        if ddr(b)='1' and i(b)='1' then
+          result(b) := std_ulogic(o(b));
+        end if;
+      end loop;  -- b
+      return result;
+    end ddr_pick;
 
     variable register_number : unsigned(7 downto 0);
   begin

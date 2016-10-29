@@ -41,7 +41,7 @@ architecture Behavioral of shadowram is
 begin
 
 --process for read and write operation.
-  PROCESS(Clk,ram,address)
+  PROCESS(Clk, ram, address, write_count, no_write_count)
   BEGIN
     data_o <= ram(address);
     writes <= write_count;

@@ -366,8 +366,9 @@ begin  -- behavioural
   process(eth_rx_buffer_moby,fastio_addr,fastio_read) is
   begin    
     rxbuffer_readaddress <= to_integer(eth_rx_buffer_moby&fastio_addr(10 downto 0));
-    if fastio_read='1' and fastio_addr(19 downto 12) = x"DE"
-      and fastio_addr(11)='1' then
+    if (fastio_read='1' and
+        fastio_addr(19 downto 12) = x"DE" and
+        fastio_addr(11)='1' ) then
       rxbuffer_cs <= '1';
     else
       rxbuffer_cs <= '0';
@@ -776,7 +777,41 @@ begin  -- behavioural
     end if;
   end process;
   
-  process (clock,fastio_addr,fastio_wdata,fastio_read,fastio_write
+  process (clock,
+           fastio_addr,
+			  fastio_wdata,
+			  fastio_read,
+			  fastio_write,
+			  rrnet_enable,
+			  rrnet_addr,
+			  rrnet_data,
+			  rrnet_data_even,
+			  rrnet_data_odd,
+			  rrnet_reading_bus_status,
+			  rrnet_tx_state,
+			  rrnet_tx_toggle,
+			  rrnet_txbuffer_addr,
+			  rrnet_debug,
+
+			  eth_reset_int,
+			  eth_irqenable_tx,
+			  eth_irqenable_rx,
+			  eth_irq_tx,
+			  eth_irq_rx,
+			  eth_tx_size,
+			  eth_tx_trigger,
+			  eth_tx_commenced,
+			  eth_tx_complete,
+			  eth_tx_viciv,
+			  eth_tx_state,
+			  eth_txen_int,
+			  eth_txd_int,
+			  eth_rxd,
+			  eth_rxdv,
+			  eth_rx_buffer_moby,
+			  eth_rx_buffer_last_used_48mhz,
+			  eth_keycode_toggle_internal,
+			  eth_videostream
            ) is
     variable temp_cmd : unsigned(7 downto 0);
 
@@ -805,11 +840,11 @@ begin  -- behavioural
       report "MEMORY: Reading from fastio";
 
       -- RR-NET emulation
-      if fastio_addr = x"D0E02" and rrnet_enable='1' then
+      if    fastio_addr = x"D0E02" and rrnet_enable='1' then
         fastio_rdata <= rrnet_addr(7 downto 0);        
       elsif fastio_addr = x"D0E03" and rrnet_enable='1' then
         fastio_rdata <= rrnet_addr(15 downto 8);
-      elsif rrnet_enable='1' and fastio_addr=x"D0E04" then
+      elsif fastio_addr = x"D0E04" and rrnet_enable='1' then
         -- @IO:GS RR-NET emulation: cs_packet_data low
         fastio_rdata <= rrnet_data(7 downto 0);
         if rrnet_reading_bus_status = '1' then

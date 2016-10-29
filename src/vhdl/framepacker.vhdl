@@ -159,7 +159,15 @@ begin  -- behavioural
 
   
   -- Look after CPU side of mapping of compressed data
-  process (ioclock,fastio_addr,fastio_wdata,fastio_read,fastio_write
+  process (ioclock,
+           fastio_addr,
+			  fastio_wdata,
+			  fastio_read,
+			  fastio_write,
+			  thumbnail_read_address,
+			  thumbnail_rdata,
+			  thumbnail_valid,
+			  thumbnail_started
            ) is
     variable temp_cmd : unsigned(7 downto 0);
   begin

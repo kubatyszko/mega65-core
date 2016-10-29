@@ -128,7 +128,7 @@ begin  -- behavioural
   -- type   : sequential
   -- inputs : pixelclock, <reset>
   -- outputs: colour, is_sprite_out
-  main: process (pixelclock)
+  main: process (pixelclock, sprite_number)
     variable sprite_number_mod_4 : integer range 0 to 7 := (sprite_number mod 4) * 2;
   begin  -- process main
     if pixelclock'event and pixelclock = '1' then  -- rising clock edge

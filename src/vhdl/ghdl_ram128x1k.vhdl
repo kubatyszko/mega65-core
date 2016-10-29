@@ -23,7 +23,7 @@ architecture behavioural of ram128x1k is
 
 begin  -- behavioural
 
-  process(clk)
+  process(clk, ram, addr)
   begin
     dout <= ram(addr);
     if(rising_edge(Clk)) then

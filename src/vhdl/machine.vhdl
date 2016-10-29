@@ -712,11 +712,20 @@ begin
   -- device via the IOmapper pull an interrupt line down, then trigger an
   -- interrupt.
   -----------------------------------------------------------------------------
-  process(irq,nmi,restore_nmi,io_irq,vic_irq,io_nmi,sw,reset_out,btnCpuReset,
-          power_on_reset,reset_monitor)
+  process(irq, nmi, restore_nmi,
+          io_irq,
+			 vic_irq,
+			 io_nmi,
+			 sw,
+			 reset_out,
+			 btnCpuReset,
+          power_on_reset,
+			 reset_monitor,
+			 hyper_trap,
+			 monitor_hyper_trap)
   begin
     -- XXX Allow switch 0 to mask IRQs
-    combinedirq <= ((irq and io_irq and vic_irq) or sw(0));
+    combinedirq <= (irq and io_irq and vic_irq)     or sw(0);
     combinednmi <= (nmi and io_nmi and restore_nmi) or sw(14);
     if btnCpuReset='0' then
       report "reset asserted via btnCpuReset";

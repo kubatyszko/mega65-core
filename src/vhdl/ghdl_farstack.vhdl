@@ -32,7 +32,7 @@ architecture behavioural of farcallstack is
 begin  -- behavioural
 
   -- 8-bit port
-  process(clka)
+  process(clka, ena, addra, ram)
   begin
     if ena='1' then
       case to_integer(unsigned(addra(2 downto 0))) is
