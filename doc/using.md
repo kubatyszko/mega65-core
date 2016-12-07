@@ -14,7 +14,7 @@
 
 ## Introduction
 
-When the bitstream has been loaded into the fpga (refer to the [build](./build.md) page for detailled instructions), the fpga will then begin to execute the bitstream.
+When the bitstream has been loaded into the fpga (refer to the [build](./build.md) page for detailed instructions), the fpga will then begin to execute the bitstream.
 
 The following is a basic list of the startup:
 
@@ -57,7 +57,7 @@ When in c64 mode, you can generally do a number of things:
 
 ## disk images
 
-The c65gs uses a 1581 disk drive.  
+The MEGA65 uses a 1581 disk drive.  
 The 1581 drive uses single sided 3.5" disks, holding approx 800kB.  
 Refer to the following for more details:
 * https://en.wikipedia.org/wiki/Commodore_1581
@@ -73,8 +73,8 @@ Both native disk formats of the 1541 and 1581 can be converted to more recent fi
 
 The mega65 'emulates' the 1581 disk drive using the SDcard. The SDcard can be used to hold many diskimages of the original 1581 disk format. These images are commonly called "D81" files. One "D81" file is 819,200 bytes. So a modest side 4GB SDcard can hold over "4000" D81 disk images.
 
-At the time of writing this, there is not much software available for the c65gs.
-There is a large amount of c64 files available that are compatible with the c65gs.
+At the time of writing this, there is not much software available for the MEGA65.
+There is a large amount of c64 files available that are compatible with the MEGA65.
 Refer to the following websites for D64 imagefiles for emulating the 1541.
 
 ## converting D64 images to D81 image format
@@ -96,7 +96,7 @@ you can now run cbmconvert from any directory.
 
 1. converting a D64 image to D81 format, verbosely, you can do:  
 ```./cbmconvert -v2 -D8 crest-2_years_crest.d81 -d crest-2_years_crest.d64```  
-1. then put the D81 file on the SDcard of the c65gs and enjoy.  
+1. then put the D81 file on the SDcard of the MEGA65 and enjoy.  
 
 * NOTE that I had 'defrag' problems when mounting some D81 files. It seems the SDcard reader can only mount the image if the D81-file is contiguous, IE: if the SDcard is fragmented, it cannot load.  
 * So, ensure that the SDcard is defragmented, either ```defrag``` on windows, or format the card, then copy on all files required.
