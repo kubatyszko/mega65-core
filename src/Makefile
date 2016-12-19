@@ -256,12 +256,13 @@ tools/pngprepare/pngprepare:	tools/pngprepare/pngprepare.c Makefile
 # within both the c64 and the c65gs
 # note that the iomap.txt file already comes from github.
 # note that the iomap.txt file is often recreated because version.vhdl is updated.
-../iomap.txt:	$(VHDLSRCDIR)/*.vhdl 
+../doc/iomap.txt:	$(VHDLSRCDIR)/*.vhdl 
 	$(warning =============================================================)
-	$(warning ~~~~~~~~~~~~~~~~> Making: ../iomap.txt)
+	$(warning ~~~~~~~~~~~~~~~~> Making: ../doc/iomap.txt)
 	# Force consistent ordering of items according to natural byte values
 	export LC_ALL=C
-	egrep "IO:C6|IO:GS" $(VHDLSRCDIR)/*.vhdl | cut -f3- -d: | sort -u -k2 > ../iomap.txt
+	# match string, cut 3rd chunk after ":", sort, pad with 2x spaces for md-format
+	egrep "IO:C6|IO:GS" $(VHDLSRCDIR)/*.vhdl | cut -f3- -d: | sort -u -k2 | awk '{printf("%s  \n", $$0)}' > ../doc/iomap.txt
 
 # ============================ done moved, Makefile-dep, print-warn, clean-target
 # script to extract the git-status from the ./.git filesystem, and to embed that string
